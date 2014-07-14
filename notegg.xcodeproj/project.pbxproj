@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C8DDD961972B08700F84B13 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD951972B08700F84B13 /* Dropbox.framework */; };
+		1C8DDD981972B1E200F84B13 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD971972B1E200F84B13 /* CFNetwork.framework */; };
+		1C8DDD9A1972B1EC00F84B13 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD991972B1EC00F84B13 /* Security.framework */; };
+		1C8DDD9C1972B1F700F84B13 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD9B1972B1F700F84B13 /* SystemConfiguration.framework */; };
+		1C8DDD9E1972B1FE00F84B13 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD9D1972B1FE00F84B13 /* QuartzCore.framework */; };
+		1C8DDDA01972B20D00F84B13 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDD9F1972B20D00F84B13 /* libc++.dylib */; };
+		1C8DDDA21972B21A00F84B13 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8DDDA11972B21A00F84B13 /* libz.dylib */; };
+		1CD350BA1972AD6900D0EC7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350B91972AD6900D0EC7B /* Foundation.framework */; };
+		1CD350BC1972AD6900D0EC7B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350BB1972AD6900D0EC7B /* CoreGraphics.framework */; };
+		1CD350BE1972AD6900D0EC7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350BD1972AD6900D0EC7B /* UIKit.framework */; };
+		1CD350C41972AD6900D0EC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CD350C21972AD6900D0EC7B /* InfoPlist.strings */; };
+		1CD350C61972AD6900D0EC7B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350C51972AD6900D0EC7B /* main.m */; };
+		1CD350CA1972AD6900D0EC7B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350C91972AD6900D0EC7B /* AppDelegate.m */; };
+		1CD350CC1972AD6900D0EC7B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CD350CB1972AD6900D0EC7B /* Images.xcassets */; };
+		1CD350D31972AD6900D0EC7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350D21972AD6900D0EC7B /* XCTest.framework */; };
+		1CD350D41972AD6900D0EC7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350B91972AD6900D0EC7B /* Foundation.framework */; };
+		1CD350D51972AD6900D0EC7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD350BD1972AD6900D0EC7B /* UIKit.framework */; };
+		1CD350DD1972AD6900D0EC7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CD350DB1972AD6900D0EC7B /* InfoPlist.strings */; };
+		1CD350DF1972AD6900D0EC7B /* noteggTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350DE1972AD6900D0EC7B /* noteggTests.m */; };
+		1CD350FE1972AF7E00D0EC7B /* BasicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350EC1972AF7D00D0EC7B /* BasicTableViewController.m */; };
+		1CD351011972AF7E00D0EC7B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350F11972AF7D00D0EC7B /* LoginViewController.m */; };
+		1CD351031972AF7E00D0EC7B /* NotebooksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350F51972AF7D00D0EC7B /* NotebooksTableViewController.m */; };
+		1CD351041972AF7E00D0EC7B /* NoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350F71972AF7D00D0EC7B /* NoteDetailViewController.m */; };
+		1CD351061972AF7E00D0EC7B /* Notegg.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD350FA1972AF7D00D0EC7B /* Notegg.storyboard */; };
+		1CD351071972AF7E00D0EC7B /* NotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD350FC1972AF7E00D0EC7B /* NotesTableViewController.m */; };
+		1CF873041973C45000CE8ABF /* Basic-Opened-folder-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF873031973C45000CE8ABF /* Basic-Opened-folder-icon@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1CD350D61972AD6900D0EC7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CD350AE1972AD6900D0EC7B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CD350B51972AD6900D0EC7B;
+			remoteInfo = notegg;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1C8DDD951972B08700F84B13 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		1C8DDD971972B1E200F84B13 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1C8DDD991972B1EC00F84B13 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1C8DDD9B1972B1F700F84B13 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1C8DDD9D1972B1FE00F84B13 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1C8DDD9F1972B20D00F84B13 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		1C8DDDA11972B21A00F84B13 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1CD350B61972AD6900D0EC7B /* notegg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = notegg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CD350B91972AD6900D0EC7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1CD350BB1972AD6900D0EC7B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1CD350BD1972AD6900D0EC7B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1CD350C11972AD6900D0EC7B /* notegg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "notegg-Info.plist"; sourceTree = "<group>"; };
+		1CD350C31972AD6900D0EC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1CD350C51972AD6900D0EC7B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1CD350C71972AD6900D0EC7B /* notegg-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "notegg-Prefix.pch"; sourceTree = "<group>"; };
+		1CD350C81972AD6900D0EC7B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1CD350C91972AD6900D0EC7B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1CD350CB1972AD6900D0EC7B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1CD350D11972AD6900D0EC7B /* noteggTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noteggTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CD350D21972AD6900D0EC7B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1CD350DA1972AD6900D0EC7B /* noteggTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "noteggTests-Info.plist"; sourceTree = "<group>"; };
+		1CD350DC1972AD6900D0EC7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1CD350DE1972AD6900D0EC7B /* noteggTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = noteggTests.m; sourceTree = "<group>"; };
+		1CD350EB1972AF7D00D0EC7B /* BasicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewController.h; sourceTree = "<group>"; };
+		1CD350EC1972AF7D00D0EC7B /* BasicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableViewController.m; sourceTree = "<group>"; };
+		1CD350F01972AF7D00D0EC7B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1CD350F11972AF7D00D0EC7B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1CD350F41972AF7D00D0EC7B /* NotebooksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotebooksTableViewController.h; sourceTree = "<group>"; };
+		1CD350F51972AF7D00D0EC7B /* NotebooksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotebooksTableViewController.m; sourceTree = "<group>"; };
+		1CD350F61972AF7D00D0EC7B /* NoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailViewController.h; sourceTree = "<group>"; };
+		1CD350F71972AF7D00D0EC7B /* NoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailViewController.m; sourceTree = "<group>"; };
+		1CD350FA1972AF7D00D0EC7B /* Notegg.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notegg.storyboard; sourceTree = "<group>"; };
+		1CD350FB1972AF7D00D0EC7B /* NotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewController.h; sourceTree = "<group>"; };
+		1CD350FC1972AF7E00D0EC7B /* NotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewController.m; sourceTree = "<group>"; };
+		1CF873031973C45000CE8ABF /* Basic-Opened-folder-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Basic-Opened-folder-icon@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CD350B31972AD6900D0EC7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C8DDDA21972B21A00F84B13 /* libz.dylib in Frameworks */,
+				1C8DDDA01972B20D00F84B13 /* libc++.dylib in Frameworks */,
+				1C8DDD9E1972B1FE00F84B13 /* QuartzCore.framework in Frameworks */,
+				1C8DDD9C1972B1F700F84B13 /* SystemConfiguration.framework in Frameworks */,
+				1C8DDD9A1972B1EC00F84B13 /* Security.framework in Frameworks */,
+				1C8DDD981972B1E200F84B13 /* CFNetwork.framework in Frameworks */,
+				1CD350BC1972AD6900D0EC7B /* CoreGraphics.framework in Frameworks */,
+				1CD350BE1972AD6900D0EC7B /* UIKit.framework in Frameworks */,
+				1CD350BA1972AD6900D0EC7B /* Foundation.framework in Frameworks */,
+				1C8DDD961972B08700F84B13 /* Dropbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CD350CE1972AD6900D0EC7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD350D31972AD6900D0EC7B /* XCTest.framework in Frameworks */,
+				1CD350D51972AD6900D0EC7B /* UIKit.framework in Frameworks */,
+				1CD350D41972AD6900D0EC7B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CD350AD1972AD6900D0EC7B = {
+			isa = PBXGroup;
+			children = (
+				1CD350BF1972AD6900D0EC7B /* notegg */,
+				1CD350D81972AD6900D0EC7B /* noteggTests */,
+				1CD350B81972AD6900D0EC7B /* Frameworks */,
+				1CD350B71972AD6900D0EC7B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1CD350B71972AD6900D0EC7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CD350B61972AD6900D0EC7B /* notegg.app */,
+				1CD350D11972AD6900D0EC7B /* noteggTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CD350B81972AD6900D0EC7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C8DDDA11972B21A00F84B13 /* libz.dylib */,
+				1C8DDD9F1972B20D00F84B13 /* libc++.dylib */,
+				1C8DDD9D1972B1FE00F84B13 /* QuartzCore.framework */,
+				1C8DDD9B1972B1F700F84B13 /* SystemConfiguration.framework */,
+				1C8DDD991972B1EC00F84B13 /* Security.framework */,
+				1C8DDD971972B1E200F84B13 /* CFNetwork.framework */,
+				1C8DDD951972B08700F84B13 /* Dropbox.framework */,
+				1CD350B91972AD6900D0EC7B /* Foundation.framework */,
+				1CD350BB1972AD6900D0EC7B /* CoreGraphics.framework */,
+				1CD350BD1972AD6900D0EC7B /* UIKit.framework */,
+				1CD350D21972AD6900D0EC7B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1CD350BF1972AD6900D0EC7B /* notegg */ = {
+			isa = PBXGroup;
+			children = (
+				1CF872EC1972D41E00CE8ABF /* images */,
+				1CD350FA1972AF7D00D0EC7B /* Notegg.storyboard */,
+				1CD350C81972AD6900D0EC7B /* AppDelegate.h */,
+				1CD350C91972AD6900D0EC7B /* AppDelegate.m */,
+				1CD350F01972AF7D00D0EC7B /* LoginViewController.h */,
+				1CD350F11972AF7D00D0EC7B /* LoginViewController.m */,
+				1CD350EB1972AF7D00D0EC7B /* BasicTableViewController.h */,
+				1CD350EC1972AF7D00D0EC7B /* BasicTableViewController.m */,
+				1CD350F41972AF7D00D0EC7B /* NotebooksTableViewController.h */,
+				1CD350F51972AF7D00D0EC7B /* NotebooksTableViewController.m */,
+				1CD350FB1972AF7D00D0EC7B /* NotesTableViewController.h */,
+				1CD350FC1972AF7E00D0EC7B /* NotesTableViewController.m */,
+				1CD350F61972AF7D00D0EC7B /* NoteDetailViewController.h */,
+				1CD350F71972AF7D00D0EC7B /* NoteDetailViewController.m */,
+				1CD350CB1972AD6900D0EC7B /* Images.xcassets */,
+				1CD350C01972AD6900D0EC7B /* Supporting Files */,
+			);
+			path = notegg;
+			sourceTree = "<group>";
+		};
+		1CD350C01972AD6900D0EC7B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CD350C11972AD6900D0EC7B /* notegg-Info.plist */,
+				1CD350C21972AD6900D0EC7B /* InfoPlist.strings */,
+				1CD350C51972AD6900D0EC7B /* main.m */,
+				1CD350C71972AD6900D0EC7B /* notegg-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1CD350D81972AD6900D0EC7B /* noteggTests */ = {
+			isa = PBXGroup;
+			children = (
+				1CD350DE1972AD6900D0EC7B /* noteggTests.m */,
+				1CD350D91972AD6900D0EC7B /* Supporting Files */,
+			);
+			path = noteggTests;
+			sourceTree = "<group>";
+		};
+		1CD350D91972AD6900D0EC7B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CD350DA1972AD6900D0EC7B /* noteggTests-Info.plist */,
+				1CD350DB1972AD6900D0EC7B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1CF872EC1972D41E00CE8ABF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1CF873031973C45000CE8ABF /* Basic-Opened-folder-icon@2x.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1CD350B51972AD6900D0EC7B /* notegg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CD350E21972AD6900D0EC7B /* Build configuration list for PBXNativeTarget "notegg" */;
+			buildPhases = (
+				1CD350B21972AD6900D0EC7B /* Sources */,
+				1CD350B31972AD6900D0EC7B /* Frameworks */,
+				1CD350B41972AD6900D0EC7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = notegg;
+			productName = notegg;
+			productReference = 1CD350B61972AD6900D0EC7B /* notegg.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1CD350D01972AD6900D0EC7B /* noteggTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CD350E51972AD6900D0EC7B /* Build configuration list for PBXNativeTarget "noteggTests" */;
+			buildPhases = (
+				1CD350CD1972AD6900D0EC7B /* Sources */,
+				1CD350CE1972AD6900D0EC7B /* Frameworks */,
+				1CD350CF1972AD6900D0EC7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CD350D71972AD6900D0EC7B /* PBXTargetDependency */,
+			);
+			name = noteggTests;
+			productName = noteggTests;
+			productReference = 1CD350D11972AD6900D0EC7B /* noteggTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1CD350AE1972AD6900D0EC7B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = xuyuanme;
+				TargetAttributes = {
+					1CD350B51972AD6900D0EC7B = {
+						DevelopmentTeam = SBNGTNE6LR;
+					};
+					1CD350D01972AD6900D0EC7B = {
+						TestTargetID = 1CD350B51972AD6900D0EC7B;
+					};
+				};
+			};
+			buildConfigurationList = 1CD350B11972AD6900D0EC7B /* Build configuration list for PBXProject "notegg" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1CD350AD1972AD6900D0EC7B;
+			productRefGroup = 1CD350B71972AD6900D0EC7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1CD350B51972AD6900D0EC7B /* notegg */,
+				1CD350D01972AD6900D0EC7B /* noteggTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CD350B41972AD6900D0EC7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD351061972AF7E00D0EC7B /* Notegg.storyboard in Resources */,
+				1CD350C41972AD6900D0EC7B /* InfoPlist.strings in Resources */,
+				1CD350CC1972AD6900D0EC7B /* Images.xcassets in Resources */,
+				1CF873041973C45000CE8ABF /* Basic-Opened-folder-icon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CD350CF1972AD6900D0EC7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD350DD1972AD6900D0EC7B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CD350B21972AD6900D0EC7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD350CA1972AD6900D0EC7B /* AppDelegate.m in Sources */,
+				1CD350C61972AD6900D0EC7B /* main.m in Sources */,
+				1CD350FE1972AF7E00D0EC7B /* BasicTableViewController.m in Sources */,
+				1CD351041972AF7E00D0EC7B /* NoteDetailViewController.m in Sources */,
+				1CD351011972AF7E00D0EC7B /* LoginViewController.m in Sources */,
+				1CD351031972AF7E00D0EC7B /* NotebooksTableViewController.m in Sources */,
+				1CD351071972AF7E00D0EC7B /* NotesTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CD350CD1972AD6900D0EC7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD350DF1972AD6900D0EC7B /* noteggTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1CD350D71972AD6900D0EC7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CD350B51972AD6900D0EC7B /* notegg */;
+			targetProxy = 1CD350D61972AD6900D0EC7B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1CD350C21972AD6900D0EC7B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CD350C31972AD6900D0EC7B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1CD350DB1972AD6900D0EC7B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CD350DC1972AD6900D0EC7B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1CD350E01972AD6900D0EC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1CD350E11972AD6900D0EC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1CD350E31972AD6900D0EC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 远 徐 (2L9QD77M8D)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "notegg/notegg-Prefix.pch";
+				INFOPLIST_FILE = "notegg/notegg-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1CD350E41972AD6900D0EC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 远 徐 (2L9QD77M8D)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "notegg/notegg-Prefix.pch";
+				INFOPLIST_FILE = "notegg/notegg-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1CD350E61972AD6900D0EC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/notegg.app/notegg";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "notegg/notegg-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "noteggTests/noteggTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		1CD350E71972AD6900D0EC7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/notegg.app/notegg";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "notegg/notegg-Prefix.pch";
+				INFOPLIST_FILE = "noteggTests/noteggTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CD350B11972AD6900D0EC7B /* Build configuration list for PBXProject "notegg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CD350E01972AD6900D0EC7B /* Debug */,
+				1CD350E11972AD6900D0EC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CD350E21972AD6900D0EC7B /* Build configuration list for PBXNativeTarget "notegg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CD350E31972AD6900D0EC7B /* Debug */,
+				1CD350E41972AD6900D0EC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CD350E51972AD6900D0EC7B /* Build configuration list for PBXNativeTarget "noteggTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CD350E61972AD6900D0EC7B /* Debug */,
+				1CD350E71972AD6900D0EC7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1CD350AE1972AD6900D0EC7B /* Project object */;
+}

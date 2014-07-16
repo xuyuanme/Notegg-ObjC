@@ -15,6 +15,8 @@
 @property UIActivityIndicatorView *activityIndicatorView;
 @property CGPoint point;
 @property CGRect selectedRect;
+@property (nonatomic, retain) NSTimer *writeTimer;
+@property (nonatomic, retain) DBFile *file;
 
 @property (weak, nonatomic) IBOutlet UITextView *noteDetailText;
 - (IBAction)doneButtonClicked:(id)sender;
@@ -38,6 +40,8 @@
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:self.activityIndicatorView];
     self.activityIndicatorView.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 3);
+    [self.activityIndicatorView setFrame:self.view.frame];
+    [self.activityIndicatorView.layer setBackgroundColor:[[UIColor colorWithWhite: 0.0 alpha:0.10] CGColor]];
 }
 
 - (void)viewDidLoad
@@ -45,6 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.noteDetailText.delegate = self;
+    _file = [[DBFilesystem sharedFilesystem] openFile:[[DBPath root] initWithString:(self.notePath)] error:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -66,36 +71,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadFile {
-    if (_loadingFiles) return;
-    _loadingFiles = YES;
-    [self.activityIndicatorView startAnimating];
-    NSLog(@"Async data load start");
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^() {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        
-        @try {
-            DBFile *file = [[DBFilesystem sharedFilesystem] openFile:[[DBPath root] initWithString:(self.notePath)] error:nil];
-            self.contents = [file readString:nil];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Catch loadFiles error:");
-            NSLog(@"%@", exception.reason);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            NSLog(@"Async data load finished");
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [self.activityIndicatorView stopAnimating];
-            self.noteDetailText.text = self.contents;
-        });
-    });
-}
+#pragma mark Button Clicked
 
 - (IBAction)doneButtonClicked:(id)sender {
     [[self noteDetailText] resignFirstResponder];
+    [_writeTimer invalidate];
+    self.writeTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(saveChanges)
+                                                     userInfo:nil repeats:NO];
 }
 
-#pragma mark Keyboard Event
+#pragma mark Keyboard Events
 
 // Call this method somewhere in your view controller setup code.
 - (void)registerForKeyboardNotifications
@@ -148,10 +133,12 @@
     self.noteDetailText.scrollIndicatorInsets = contentInsets;
 }
 
+#pragma mark UITextViewDelegate Methods
+
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-//    UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:textView.selectedRange.location];
-//    CGRect caretRect = [textView caretRectForPosition:start];
-//    self.selectedPoint = caretRect.origin;
+    //    UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:textView.selectedRange.location];
+    //    CGRect caretRect = [textView caretRectForPosition:start];
+    //    self.selectedPoint = caretRect.origin;
     _point = [textView caretRectForPosition:textView.selectedTextRange.start].origin;
     self.selectedRect = CGRectMake(_point.x, _point.y+20, 1, 1);
     NSLog(@"Set click point: %f,%f", self.selectedRect.origin.x, self.selectedRect.origin.y);
@@ -163,6 +150,46 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.doneButton.enabled = false;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [_writeTimer invalidate];
+    self.writeTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(saveChanges)
+                                                     userInfo:nil repeats:NO];
+}
+
+#pragma mark Private Methods
+
+- (void)loadFile {
+    if (_loadingFiles) return;
+    _loadingFiles = YES;
+    [self.activityIndicatorView startAnimating];
+    NSLog(@"Async data load start");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^() {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        @try {
+            self.contents = [_file readString:nil];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Catch loadFiles error:");
+            NSLog(@"%@", exception.reason);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            NSLog(@"Async data load finished");
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [self.activityIndicatorView stopAnimating];
+            self.noteDetailText.text = self.contents;
+        });
+    });
+}
+
+- (void)saveChanges {
+    if (!_writeTimer) return;
+    [_writeTimer invalidate];
+    self.writeTimer = nil;
+    NSLog(@"Saving %@ ", self.noteTitle);
+    [_file writeString:self.noteDetailText.text error:nil];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NoteDetailViewController : UIViewController
+@interface NoteDetailViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic) NSString *noteTitle;
 @property NSString *notePath;

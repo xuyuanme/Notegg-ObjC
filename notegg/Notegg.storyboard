@@ -110,6 +110,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneButton" destination="DNj-dw-sNf" id="4L6-wy-LWN"/>
                         <outlet property="noteDetailText" destination="1NI-o1-Vqu" id="ad6-yK-ytc"/>
                     </connections>
                 </viewController>

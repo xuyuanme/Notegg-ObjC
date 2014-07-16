@@ -13,9 +13,12 @@
 @property (nonatomic, assign) BOOL loadingFiles;
 @property NSString *contents;
 @property UIActivityIndicatorView *activityIndicatorView;
+@property CGPoint point;
+@property CGRect selectedRect;
 
 @property (weak, nonatomic) IBOutlet UITextView *noteDetailText;
 - (IBAction)doneButtonClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
@@ -41,11 +44,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.noteDetailText.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.title = _noteTitle;
+    self.doneButton.enabled = false;
+    [self registerForKeyboardNotifications];
     [self loadFile];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self deregisterForKeyboardNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +93,76 @@
 
 - (IBAction)doneButtonClicked:(id)sender {
     [[self noteDetailText] resignFirstResponder];
+}
+
+#pragma mark Keyboard Event
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)deregisterForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(64, 0.0, kbSize.height, 0.0);
+    self.noteDetailText.contentInset = contentInsets;
+    self.noteDetailText.scrollIndicatorInsets = contentInsets;
+
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height; // exclude keyboard height
+    aRect.size.height -= 64; // exclude nav bar and status bar height
+    if (!CGRectContainsPoint(aRect, self.selectedRect.origin) ) {
+        [self.noteDetailText scrollRectToVisible:self.selectedRect animated:NO];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(64, 0.0, 0.0, 0.0);
+    self.noteDetailText.contentInset = contentInsets;
+    self.noteDetailText.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+//    UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:textView.selectedRange.location];
+//    CGRect caretRect = [textView caretRectForPosition:start];
+//    self.selectedPoint = caretRect.origin;
+    _point = [textView caretRectForPosition:textView.selectedTextRange.start].origin;
+    self.selectedRect = CGRectMake(_point.x, _point.y+20, 1, 1);
+    NSLog(@"Set click point: %f,%f", self.selectedRect.origin.x, self.selectedRect.origin.y);
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.doneButton.enabled = true;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    self.doneButton.enabled = false;
 }
 
 @end

@@ -10,13 +10,12 @@
 
 @interface NoteDetailViewController ()
 
-@property (nonatomic, assign) BOOL loadingFiles;
-@property NSString *contents;
 @property UIActivityIndicatorView *activityIndicatorView;
 @property CGPoint point;
 @property CGRect selectedRect;
 @property (nonatomic, retain) NSTimer *writeTimer;
 @property (nonatomic, retain) DBFile *file;
+@property BOOL newVersion;
 
 @property (weak, nonatomic) IBOutlet UITextView *noteDetailText;
 - (IBAction)doneButtonClicked:(id)sender;
@@ -57,12 +56,19 @@
     self.title = _noteTitle;
     self.doneButton.enabled = false;
     [self registerForKeyboardNotifications];
+    __weak NoteDetailViewController *weakSelf = self;
+    [_file addObserver:self block:^() {
+        NSLog(@"File change observed, reload");
+        [weakSelf loadFile];
+    }];
+    _newVersion = YES;
     [self loadFile];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self deregisterForKeyboardNotifications];
+    [_file removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,27 +167,30 @@
 #pragma mark Private Methods
 
 - (void)loadFile {
-    if (_loadingFiles) return;
-    _loadingFiles = YES;
-    [self.activityIndicatorView startAnimating];
-    NSLog(@"Async data load start");
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^() {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (self.doneButton.enabled) {
+        // Don't update when the text is being edited
+        return;
+    }
+    if (_file.newerStatus.cached) {
+        NSLog(@"File new version cached, update content");
+        [_file update:nil];
+        _newVersion = YES;
+    }
+    if (_file.status.cached) {
+        if (_newVersion) { // Only update the new version content
+            NSLog(@"File new version cached, update UI");
+            self.noteDetailText.text = [_file readString:nil];
+            _newVersion = NO;
+        }
         
-        @try {
-            self.contents = [_file readString:nil];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Catch loadFiles error:");
-            NSLog(@"%@", exception.reason);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            NSLog(@"Async data load finished");
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [self.activityIndicatorView stopAnimating];
-            self.noteDetailText.text = self.contents;
-        });
-    });
+        NSLog(@"Stop animating");
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self.activityIndicatorView stopAnimating];
+    } else {
+        NSLog(@"File not cached yet, start animating");
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self.activityIndicatorView startAnimating];
+    }
 }
 
 - (void)saveChanges {

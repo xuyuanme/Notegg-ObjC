@@ -43,22 +43,28 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    __weak BasicTableViewController *weakSelf = self;
-    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        NSLog(@"DBFilesystem change observed, do nothing");
-        //        [weakSelf loadFiles];
-    }];
-    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndChildren:[DBPath root] block:^{
-        NSLog(@"DBFilesystem forPathAndChildren change observed, reload files");
-        [weakSelf loadFiles];
-    }];
 
     // self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    __weak BasicTableViewController *weakSelf = self;
+    
+    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
+        NSLog(@"DBFilesystem change observed, reload files");
+        [weakSelf loadFiles];
+    }];
+    
+    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndChildren:[DBPath root] block:^{
+        NSLog(@"DBFilesystem forPathAndChildren change observed, do nothing");
+//        [weakSelf loadFiles];
+    }];
+    
     [self loadFiles];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[DBFilesystem sharedFilesystem] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning

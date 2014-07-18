@@ -22,14 +22,28 @@
 }
 
 - (IBAction)addButtonClicked:(id)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Create Note" message:@"Enter new note name" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        DBFile *file = [[DBFilesystem sharedFilesystem] createFile:[self.path childPath:[NSString stringWithFormat:@"%@%@", [alertView textFieldAtIndex:0].text, @".txt"]] error:nil];
+        if (!file) {
+            [[[UIAlertView alloc] initWithTitle:nil message:@"Unable to create note" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        } else {
+            [self loadFiles];
+        }
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[NoteDetailViewController class]]) {
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NoteDetailViewController *noteDetailViewController = segue.destinationViewController;
         
-        noteDetailViewController.notePath = [[(DBFileInfo *)self.contents[[path row]] path] stringValue];
+        noteDetailViewController.path = [(DBFileInfo *)self.contents[[indexPath row]] path];
     }
 }
 

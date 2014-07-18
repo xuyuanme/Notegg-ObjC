@@ -10,9 +10,12 @@
 
 @interface BasicTableViewController : UITableViewController <UITableViewDelegate>
 
-@property NSArray *contents;
-@property BOOL showFolder;
+#define CREATE_ALERT 1
 
-- (void) setChildPath:(NSString*)childPath;
+@property NSMutableArray *contents;
+@property BOOL showFolder;
+@property DBPath *path;
+
+- (void)loadFiles;
 
 @end

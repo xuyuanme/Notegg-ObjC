@@ -48,7 +48,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.noteDetailText.delegate = self;
-    _file = [[DBFilesystem sharedFilesystem] openFile:[[DBPath root] initWithString:(self.notePath)] error:nil];
+    _file = [[DBFilesystem sharedFilesystem] openFile:_path error:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

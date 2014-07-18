@@ -8,9 +8,9 @@
 
 #import "BasicTableViewController.h"
 
-@interface BasicTableViewController ()
+@interface BasicTableViewController () <UIActionSheetDelegate>
 
-@property (nonatomic) NSString *childPath;
+@property NSIndexPath *toBeDeletedIndexPath;
 @property (nonatomic, assign) BOOL loadingFiles;
 @property UIActivityIndicatorView *activityIndicatorView;
 
@@ -51,13 +51,13 @@
     __weak BasicTableViewController *weakSelf = self;
     
     [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        NSLog(@"DBFilesystem change observed, reload files");
-        [weakSelf loadFiles];
+        NSLog(@"DBFilesystem change observed, do nothing");
+//        [weakSelf loadFiles];
     }];
     
-    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndChildren:[DBPath root] block:^{
-        NSLog(@"DBFilesystem forPathAndChildren change observed, do nothing");
-//        [weakSelf loadFiles];
+    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndChildren:_path block:^{
+        NSLog(@"DBFilesystem forPathAndChildren change observed, reload files");
+        [weakSelf loadFiles];
     }];
     
     [self loadFiles];
@@ -80,8 +80,8 @@
     // Sometimes set title in loadFiles method asyncly does not work
     // Have to set title after reload happens
     // Should there be a better place to call this method?
-    if (_childPath && [_childPath compare:@"/"]) { // set title when the path is not root
-        [self.navigationItem setTitle:_childPath];
+    if (_path && [[_path name] compare:@"/"]) { // set title when the path is not root
+        [self.navigationItem setTitle:[_path name]];
     }
     
     // Return the number of sections.
@@ -108,6 +108,36 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.toBeDeletedIndexPath = indexPath;
+    DBFileInfo *fileInfo = [_contents objectAtIndex:[indexPath row]];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:[NSString stringWithFormat:@"%@%@", @"Delete ", [[[fileInfo path] name] stringByDeletingPathExtension]], nil];
+    NSArray *actionSheetButtons = actionSheet.subviews;
+    for (int i = 0; [actionSheetButtons count] > i; i++) {
+        UIView *view = (UIView*)[actionSheetButtons objectAtIndex:i];
+        if([view isKindOfClass:[UIButton class]]){
+            UIButton *btn = (UIButton*)view;
+            [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        }
+    }
+    [actionSheet showInView:self.navigationController.view];
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        DBFileInfo *fileInfo = [_contents objectAtIndex:[_toBeDeletedIndexPath row]];
+        if ([[DBFilesystem sharedFilesystem] deletePath:[fileInfo path] error:nil]) {
+            [_contents removeObjectAtIndex:[_toBeDeletedIndexPath row]];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:_toBeDeletedIndexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Can't delete the item" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            [self loadFiles];
+        }
+    }
 }
 
 #pragma mark - private methods
@@ -137,18 +167,18 @@ NSInteger sortFileInfos(id obj1, id obj2, void *ctx) {
         @try {
             
             // If path is invalid, read the first folder of root
-            if (!_childPath || ![[[DBFilesystem sharedFilesystem] fileInfoForPath:[[DBPath root] childPath:_childPath] error:nil] isFolder]) {
+            if (!_path || ![[[DBFilesystem sharedFilesystem] fileInfoForPath:_path error:nil] isFolder]) {
                 immContents = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:nil];
                 if ([immContents count]) {
-                    _childPath = [((DBFileInfo *)immContents[0]).path name];
+                    _path = ((DBFileInfo *)immContents[0]).path;
                 } else {
                     // If there's not any folder, create the Main folder
-                    _childPath = @"Main";
-                    [[DBFilesystem sharedFilesystem] createFolder:[[DBPath root] childPath:_childPath] error:nil];
+                    _path = [[DBPath root] childPath:@"Main"];
+                    [[DBFilesystem sharedFilesystem] createFolder:_path error:nil];
                 }
             }
             
-            immContents = [[DBFilesystem sharedFilesystem] listFolder:[[DBPath root] childPath:_childPath] error:nil];
+            immContents = [[DBFilesystem sharedFilesystem] listFolder:_path error:nil];
             // filter out the file or folder
             mContents = [NSMutableArray arrayWithArray:[immContents filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id obj, NSDictionary *bind){
                 if (self.showFolder) { // show folder, and it is or is not folder
@@ -179,12 +209,6 @@ NSInteger sortFileInfos(id obj1, id obj2, void *ctx) {
             }
         });
     });
-}
-
-#pragma mark public setter
-
-- (void)setChildPath:childPath {
-    _childPath = childPath;
 }
 
 @end

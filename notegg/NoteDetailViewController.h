@@ -10,6 +10,6 @@
 
 @interface NoteDetailViewController : UIViewController <UITextViewDelegate>
 
-@property NSString *notePath;
+@property DBPath *path;
 
 @end

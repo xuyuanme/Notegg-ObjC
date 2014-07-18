@@ -53,12 +53,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.title = _noteTitle;
+    self.title = [_file.info.path.name stringByDeletingPathExtension];
     self.doneButton.enabled = false;
     [self registerForKeyboardNotifications];
     __weak NoteDetailViewController *weakSelf = self;
     [_file addObserver:self block:^() {
-        NSLog(@"File change observed, reload");
+        weakSelf.title = [weakSelf.file.info.path.name stringByDeletingPathExtension];
         [weakSelf loadFile];
     }];
     _newVersion = YES;
@@ -81,9 +81,7 @@
 
 - (IBAction)doneButtonClicked:(id)sender {
     [[self noteDetailText] resignFirstResponder];
-    [_writeTimer invalidate];
-    self.writeTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(saveChanges)
-                                                     userInfo:nil repeats:NO];
+    // [self loadFile]; // don't load file again, otherwise the edited text might get lose
 }
 
 #pragma mark Keyboard Events
@@ -147,7 +145,7 @@
     //    self.selectedPoint = caretRect.origin;
     _point = [textView caretRectForPosition:textView.selectedTextRange.start].origin;
     self.selectedRect = CGRectMake(_point.x, _point.y+20, 1, 1);
-    NSLog(@"Set click point: %f,%f", self.selectedRect.origin.x, self.selectedRect.origin.y);
+//    NSLog(@"Set click point: %f,%f", self.selectedRect.origin.x, self.selectedRect.origin.y);
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -197,7 +195,7 @@
     if (!_writeTimer) return;
     [_writeTimer invalidate];
     self.writeTimer = nil;
-    NSLog(@"Saving %@ ", self.noteTitle);
+    NSLog(@"Saving %@", self.title);
     [_file writeString:self.noteDetailText.text error:nil];
 }
 

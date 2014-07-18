@@ -30,7 +30,6 @@
         NoteDetailViewController *noteDetailViewController = segue.destinationViewController;
         
         noteDetailViewController.notePath = [[(DBFileInfo *)self.contents[[path row]] path] stringValue];
-        noteDetailViewController.noteTitle = [[[(DBFileInfo *)self.contents[[path row]] path] name] stringByDeletingPathExtension];
     }
 }
 

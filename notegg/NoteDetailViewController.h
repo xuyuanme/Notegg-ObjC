@@ -10,7 +10,6 @@
 
 @interface NoteDetailViewController : UIViewController <UITextViewDelegate>
 
-@property (nonatomic) NSString *noteTitle;
 @property NSString *notePath;
 
 @end

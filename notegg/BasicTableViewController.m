@@ -80,7 +80,7 @@
     // Sometimes set title in loadFiles method asyncly does not work
     // Have to set title after reload happens
     // Should there be a better place to call this method?
-    if (_path && [[_path name] compare:@"/"]) { // set title when the path is not root
+    if (_path && _path != [DBPath root]) { // set title when the path is not root
         [self.navigationItem setTitle:[_path name]];
     }
     
